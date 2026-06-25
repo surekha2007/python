@@ -1,0 +1,50 @@
+# Stock Portfolio Tracker
+
+# Hardcoded stock prices
+stock_prices = {
+    "AAPL": 180,
+    "TSLA": 250,
+    "GOOGLE": 140,
+    "AMAZON": 130,
+    "MSFT": 320
+}
+
+# Store total investment
+total_investment = 0
+
+# User input
+n = int(input("How many stocks do you want to add? "))
+
+portfolio = {}
+
+for i in range(n):
+    stock = input("Enter stock name: ").upper()
+    quantity = int(input("Enter quantity: "))
+
+    # Check if stock exists
+    if stock in stock_prices:
+        value = stock_prices[stock] * quantity
+        total_investment += value
+        portfolio[stock] = quantity
+    else:
+        print("Stock not found!")
+
+# Display result
+print("\n--- Portfolio ---")
+
+for stock, quantity in portfolio.items():
+    print(stock, "Quantity:", quantity,
+          "Value:", stock_prices[stock] * quantity)
+
+print("\nTotal Investment Value: $", total_investment)
+
+
+# Optional: Save result to file
+with open("portfolio.txt", "w") as file:
+    file.write("Stock Portfolio\n")
+    for stock, quantity in portfolio.items():
+        file.write(f"{stock} - Quantity: {quantity}\n")
+
+    file.write(f"Total Investment: ${total_investment}")
+
+print("Portfolio saved successfully!")
